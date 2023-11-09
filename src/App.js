@@ -315,27 +315,33 @@ const App = () => {
     }
 
     const modalExplanationInputView = () => <div className="mb-3">
-        <input type="text" className="form-control"
-               id="explanation"
-               placeholder="Açıklama"
-               defaultValue={selectedItem?.explanation || ''}
-               {...register('explanation', {
-                   required: true,
-                   maxLength: 20
-               })}/>
+        <Controller
+            name="explanation"
+            control={control}
+            render={({field}) => (
+                <input type="text" className="form-control"
+                       id="explanation"
+                       placeholder="Açıklama"
+                       value={field.value || selectedItem?.explanation}
+                       onChange={field.onChange}
+                />
+            )}/>
     </div>;
 
     const modalAmountInputView = () => <div className="mb-3">
-        <input type="number"
-               step={0.01}
-               className="form-control"
-               id="amount"
-               placeholder="Tutar"
-               value={parseFloat(selectedItem?.amount) > 0 ? parseFloat(selectedItem?.amount) : parseFloat(selectedItem?.amount) * -1 || ''}
-               {...register('amount', {
-                   required: true,
-                   min: 1
-               })}/>
+        <Controller
+            name="amount"
+            control={control}
+            render={({field}) => (
+                <input type="number"
+                       step={0.01}
+                       className="form-control"
+                       id="amount"
+                       placeholder="Tutar"
+                       value={field.value ? parseFloat(field.value) : selectedItem?.amount}
+                       onChange={field.onChange}
+                />
+            )}/>
     </div>;
 
     const modalDateView = () => <div className="mb-3">
@@ -355,17 +361,29 @@ const App = () => {
             )}/>
     </div>;
 
+    const setPeriodOnUpdate = () => {
+        const period = selectedItem?.period?.split(' - ');
+        if (period) {
+            return period[1];
+        } else {
+            return '1';
+        }
+    }
+
     const modalPeriodSelectView = () => <div className="mb-3">
-        <select className="form-select"
-                aria-label="Default select example"
-                id="period"
-                defaultValue={selectedItem?.period || '1'}
-                {...register('period', {
-                    required: true
-                })}>
-            <option value="1">Ay Başı</option>
-            <option value="2">Ay Ortası</option>
-        </select>
+        <Controller
+            name="period"
+            control={control}
+            render={({field}) => (
+                <select className="form-select"
+                        aria-label="Default select period"
+                        id="period"
+                        value={field.value || setPeriodOnUpdate()}
+                        onChange={field.onChange}>
+                    <option value="1">Ay Başı</option>
+                    <option value="2">Ay Ortası</option>
+                </select>
+            )}/>
     </div>;
 
     const dismissAllModals = () => () => {
@@ -487,16 +505,6 @@ const App = () => {
 
     const drawCanvas = () => <canvas ref={chartRef} id="myChart" width="400" height="200"></canvas>;
 
-    const openUpdateModal = (item) => {
-        if (item.amount < 0) {
-            setIsUpdateExpenseModalOpen(true);
-        } else {
-            setIsUpdateIncomeModalOpen(true);
-        }
-        setSelectedItem(item);
-        console.log('selectedItem', selectedItem)
-    };
-
     const getListView = () => {
         const getItemView = () => {
             return (
@@ -509,29 +517,40 @@ const App = () => {
                         const fifteenItemClass = () => isDiffLessFifteen ? 'list-group-item-warning' : 'list-group-item-primary';
 
                         const listItemClass = isDiffLessZero ? 'list-group-item-danger' : fifteenItemClass();
+
+                        function setOnMinus() {
+                            if (item.amount < 0) {
+                                setIsUpdateExpenseModalOpen(true);
+                                item.amount = item.amount * -1;
+                            } else {
+                                setIsUpdateIncomeModalOpen(true);
+                            }
+                            setSelectedItem(item);
+                        }
                         return (
-                            <>
+                            <div key={item.id}>
                                 <a
                                     href="#"
                                     className={"list-group-item list-group-item-action " + listItemClass + " d-flex justify-content-between align-items-center} "}
                                     data-bs-toggle="collapse"
                                     data-bs-target={"#" + collapseId} aria-expanded="false"
                                     aria-controls={collapseId}
+                                    style={{ color: item.amount < 0 ? 'red' : 'green' }}
                                 >
-                                    {moment(item.date).format('DD.MM.YYYY')} - {item.explanation} - {item.amount.toLocaleString()} TL
+                                    {moment(item.date).format('DD.MM.YYYY')} - {item.explanation} <span style={{ color: item.amount < 0 ? 'red' : 'green' }}>{item.amount.toLocaleString("tr", {minimumFractionDigits:2})} TL </span>
                                 </a>
                                 <div className="collapse" id={collapseId}>
                                     <div className="card card-body mt-3 mb-3">
                                         <div className="btn-group" role="group" aria-label="button options">
                                             <button type="button" className="btn btn-outline-warning"
-                                                    onClick={() => openUpdateModal(item)}>Güncelle
+                                                    onClick={() => setOnMinus()}>Güncelle
                                             </button>
                                             <button type="button" className="btn btn-outline-success">Ödendi</button>
                                             <button type="button" className="btn btn-outline-danger">Sil</button>
                                         </div>
                                     </div>
                                 </div>
-                            </>
+                            </div>
                         );
                     })}
                 </>
