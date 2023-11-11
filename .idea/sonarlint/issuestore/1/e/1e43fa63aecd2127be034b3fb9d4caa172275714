@@ -1,20 +1,20 @@
 
 Njavascript:S1128"&Remove this unused import of 'remove'.(òÔûøÿÿÿÿ8Ù¢´Ø»1
 |javascript:S3776"TRefactor this function to reduce its Cognitive Complexity from 78 to the 15 allowed.(³‘«‘ùÿÿÿÿ8Ù¢´Ø»1
-^javascript:S1481"";Remove the declaration of the unused 'selectedId' variable.(¤›‰8©»ÍØ»1
-[javascript:S1854""8Remove this useless assignment to variable "selectedId".(¤›‰8©»ÍØ»1
-ˆjavascript:S1082Ü"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ßÕõ¶ûÿÿÿÿ8Ù¢´Ø»1
-`javascript:S1481š"<Remove the declaration of the unused 'explanation' variable.(ãú¶¸8Ù¢´Ø»1
-]javascript:S1854š"9Remove this useless assignment to variable "explanation".(ãú¶¸8Ù¢´Ø»1
-[javascript:S1481š"7Remove the declaration of the unused 'amount' variable.(ãú¶¸8Ù¢´Ø»1
-Xjavascript:S1854š"4Remove this useless assignment to variable "amount".(ãú¶¸8Ù¢´Ø»1
-Yjavascript:S1481š"5Remove the declaration of the unused 'date' variable.(ãú¶¸8Ù¢´Ø»1
-Vjavascript:S1854š"2Remove this useless assignment to variable "date".(ãú¶¸8Ù¢´Ø»1
-[javascript:S1481š"7Remove the declaration of the unused 'period' variable.(ãú¶¸8Ù¢´Ø»1
-Xjavascript:S1854š"4Remove this useless assignment to variable "period".(ãú¶¸8Ù¢´Ø»1
-Tjavascript:S1854š"0Remove this useless assignment to variable "id".(ãú¶¸8Ù¢´Ø»1
-Bjavascript:S125œ"Remove this commented out code.(½‘Ñ³8Ù¢´Ø»1
-bjavascript:S1481–">Remove the declaration of the unused 'deleteClicked' variable.(Øµß˜8Ù¢´Ø»1
-_javascript:S1854–";Remove this useless assignment to variable "deleteClicked".(Øµß˜8Ù¢´Ø»1
-Bjavascript:S125—"Remove this commented out code.(½‘Ñ³8Ú¢´Ø»1
-Ÿjavascript:S6819°"{Use <details>, <fieldset>, <optgroup>, or <address> instead of the "group" role to ensure accessibility across all devices.(ÈÉÅæ8Ú¢´Ø»1
+^javascript:S1481#";Remove the declaration of the unused 'selectedId' variable.(¤›‰8©»ÍØ»1
+[javascript:S1854#"8Remove this useless assignment to variable "selectedId".(¤›‰8©»ÍØ»1
+ˆjavascript:S1082İ"_Visible, non-interactive elements with click handlers must have at least one keyboard listener.(ßÕõ¶ûÿÿÿÿ8Ù¢´Ø»1
+`javascript:S1481›"<Remove the declaration of the unused 'explanation' variable.(ãú¶¸8Ù¢´Ø»1
+]javascript:S1854›"9Remove this useless assignment to variable "explanation".(ãú¶¸8Ù¢´Ø»1
+[javascript:S1481›"7Remove the declaration of the unused 'amount' variable.(ãú¶¸8Ù¢´Ø»1
+Xjavascript:S1854›"4Remove this useless assignment to variable "amount".(ãú¶¸8Ù¢´Ø»1
+Yjavascript:S1481›"5Remove the declaration of the unused 'date' variable.(ãú¶¸8Ù¢´Ø»1
+Vjavascript:S1854›"2Remove this useless assignment to variable "date".(ãú¶¸8Ù¢´Ø»1
+[javascript:S1481›"7Remove the declaration of the unused 'period' variable.(ãú¶¸8Ù¢´Ø»1
+Xjavascript:S1854›"4Remove this useless assignment to variable "period".(ãú¶¸8Ù¢´Ø»1
+Tjavascript:S1854›"0Remove this useless assignment to variable "id".(ãú¶¸8Ù¢´Ø»1
+Bjavascript:S125"Remove this commented out code.(½‘Ñ³8Ù¢´Ø»1
+bjavascript:S1481—">Remove the declaration of the unused 'deleteClicked' variable.(Øµß˜8Ù¢´Ø»1
+_javascript:S1854—";Remove this useless assignment to variable "deleteClicked".(Øµß˜8Ù¢´Ø»1
+Bjavascript:S125˜"Remove this commented out code.(½‘Ñ³8Ú¢´Ø»1
+Ÿjavascript:S6819±"{Use <details>, <fieldset>, <optgroup>, or <address> instead of the "group" role to ensure accessibility across all devices.(ÈÉÅæ8Ú¢´Ø»1
