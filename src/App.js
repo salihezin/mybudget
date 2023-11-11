@@ -31,6 +31,7 @@ const App = () => {
     const [fetchedData, setFetchedData] = useState([]);
     const [monthlyTotal, setMonthlyTotal] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
 
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
@@ -269,7 +270,7 @@ const App = () => {
             explanation: explanation,
             amount: parseFloat(amount),
             period: moment(newDate).format('MMMM YYYY') + ' - ' + period,
-            date: date.toISOString(),
+            date: moment(date).toISOString(),
             isPaid: false,
         });
         dismissAllModals();
@@ -319,11 +320,13 @@ const App = () => {
             name="explanation"
             control={control}
             render={({field}) => (
-                <input type="text" className="form-control"
-                       id="explanation"
-                       placeholder="Açıklama"
-                       value={field.value || selectedItem?.explanation}
-                       onChange={field.onChange}
+                <input
+                    type="text"
+                    className="form-control"
+                    id="explanation"
+                    placeholder="Açıklama"
+                    value={field.value || selectedItem?.explanation || ''}
+                    onChange={field.onChange}
                 />
             )}/>
     </div>;
@@ -338,7 +341,7 @@ const App = () => {
                        className="form-control"
                        id="amount"
                        placeholder="Tutar"
-                       value={field.value ? parseFloat(field.value) : selectedItem?.amount}
+                       value={field.value ? parseFloat(field.value) : selectedItem?.amount || ''}
                        onChange={field.onChange}
                 />
             )}/>
@@ -527,6 +530,18 @@ const App = () => {
                             }
                             setSelectedItem(item);
                         }
+
+                        const deleteClicked = () => {
+                            /*try {
+                                remove(ref(database, userId + '/' + selectedId)).catch((error) => {
+                                    console.log(error);
+                                });
+                                dismissAllModals();
+                                setSelectedId(null);
+                            } catch (error) {
+                                console.log(error);
+                            }*/
+                        };
                         return (
                             <div key={item.id}>
                                 <a
@@ -535,9 +550,10 @@ const App = () => {
                                     data-bs-toggle="collapse"
                                     data-bs-target={"#" + collapseId} aria-expanded="false"
                                     aria-controls={collapseId}
-                                    style={{ color: item.amount < 0 ? 'red' : 'green' }}
+                                    style={{color: item.amount < 0 ? 'red' : 'green'}}
                                 >
-                                    {moment(item.date).format('DD.MM.YYYY')} - {item.explanation} <span style={{ color: item.amount < 0 ? 'red' : 'green' }}>{item.amount.toLocaleString("tr", {minimumFractionDigits:2})} TL </span>
+                                    {moment(item.date).format('DD.MM.YYYY')} - {item.explanation} <span
+                                    style={{color: item.amount < 0 ? 'red' : 'green'}}>{item.amount.toLocaleString("tr", {minimumFractionDigits: 2})} TL </span>
                                 </a>
                                 <div className="collapse" id={collapseId}>
                                     <div className="card card-body mt-3 mb-3">
@@ -546,7 +562,14 @@ const App = () => {
                                                     onClick={() => setOnMinus()}>Güncelle
                                             </button>
                                             <button type="button" className="btn btn-outline-success">Ödendi</button>
-                                            <button type="button" className="btn btn-outline-danger">Sil</button>
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-danger"
+                                                onClick={() => {
+                                                    setSelectedId(item.id);
+                                                }}
+                                            >Sil
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
