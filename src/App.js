@@ -16,6 +16,7 @@ import {Controller, useForm} from "react-hook-form";
 import Chart from 'chart.js/auto';
 
 const App = () => {
+    console.log("git_test_1");
     const dispatch = useDispatch();
     const authState = useSelector((state) => state.auth);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
